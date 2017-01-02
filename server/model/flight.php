@@ -13,7 +13,7 @@ function getFlights() {
 }
 
 function getFlightBySrc($src) {
-    
+
     // dd($src);
     global $conn;
     $flights = array();
@@ -25,19 +25,25 @@ function getFlightBySrc($src) {
     }
     return $flights;
 }
-
-function deletePlaneById($id) {
+function deleteFlightPass($id) {
     global $conn;
-    $sql = "DELETE FROM plane WHERE id=".$id;
+    $sql = "DELETE FROM flight_passenger WHERE flight_id=".$id;
     $result = $conn->query($sql);
 }
+function deleteFlightById($id) {
+    global $conn;
+    
+    $sql = "DELETE FROM flight WHERE id=".$id;
+    $result = $conn->query($sql);
+    dd($sql);
+}
 
-function insertPlane($plane) {
+function insertFlight($flight) {
     global $conn;
     $newId = null;
-    $sql = 'INSERT INTO plane (model, seat_count) VALUES ' . 
-           ' ("' . $plane->model . '", ' . $plane->seat_count .')';
-
+    $sql = 'INSERT INTO flight (origin, dest, plane_id) VALUES ' . 
+           ' ("' . $flight->origin . '", "' . $flight->dest .'", ' . $flight->plane_id .')';
+           
     if ($conn->query($sql) === TRUE) {
         // echo "New record created successfully";
         $newId = $conn->insert_id;
@@ -45,10 +51,11 @@ function insertPlane($plane) {
     return $newId;
 }
 
-function updatePlane($plane) {
+function updateFlight($flight, $id) {
     global $conn;
-    $sql = 'UPDATE plane SET model="' .$plane->model .'" , seat_count='.$plane->seat_count.' WHERE id=' . $plane->id;
+    $sql = 'UPDATE flight SET origin="' .$flight->origin .'" , dest="'.$flight->dest.'", plane_id=' . $flight->plane_id.' WHERE id=' .$id;
     $conn->query($sql);
+    // dd($sql);    
 }
 
 ?>

@@ -32,10 +32,10 @@ function deleteFlightPass($id) {
 }
 function deleteFlightById($id) {
     global $conn;
-    
+  
     $sql = "DELETE FROM flight WHERE id=".$id;
     $result = $conn->query($sql);
-    dd($sql);
+    // dd($sql);
 }
 
 function insertFlight($flight) {
@@ -53,8 +53,11 @@ function insertFlight($flight) {
 
 function updateFlight($flight, $id) {
     global $conn;
-    $sql = 'UPDATE flight SET origin="' .$flight->origin .'" , dest="'.$flight->dest.'", plane_id=' . $flight->plane_id.' WHERE id=' .$id;
-    $conn->query($sql);
+    $sql = 'UPDATE flight SET origin="' 
+                    .$flight->origin .'" , dest="'
+                    .$flight->dest.'", plane_id=' 
+                    .$flight->plane_id.' WHERE id=' .$id;
+                    $conn->query($sql);
     // dd($sql);    
 }
 

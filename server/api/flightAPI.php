@@ -23,13 +23,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     // Read the JSON we got in the req 
     $entity = file_get_contents('php://input');
     $entity = json_decode($entity);
+    // dd($entity);
     updateFlight($entity, $idToUpdate);
 
 } else if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
-     $idToDelete =(int) r('id');
-     deleteFlightPass($idToDelete);
+    $idToDelete =(int) r('id');
+    deleteFlightPass($idToDelete);
     //  $idToRemove = (int)$_REQUEST['id'];
-     deleteFlightById($idToDelete);
+    deleteFlightById($idToDelete);
+
 
 } else if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $entity = file_get_contents('php://input');
